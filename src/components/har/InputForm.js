@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Log = ({ log }) => {
+const InputForm = ({ log }) => {
   const classes = useStyles();
 
   return (
@@ -31,41 +31,9 @@ const Log = ({ log }) => {
             </Typography>
           </Paper>
         </Grid>
-
-        {log?.creator && (
-          <Grid item xs={12}>
-            <Creator creator={log.creator} />
-          </Grid>
-        )}
-
-        {log?.browser && (
-          <Grid item xs={12}>
-            <Browser browser={log.browser} />
-          </Grid>
-        )}
-
-        {log?.pages &&
-          log.pages.map((page, i) => (
-            <Grid item xs={12} key={i} className="pages">
-              <Pages pages={page} />
-            </Grid>
-          ))}
-
-        {log?.entries &&
-          log.entries.map((entry, i) => (
-            <Grid item xs={12} key={i} className="entries">
-              <Entries entries={entry} />
-            </Grid>
-          ))}
-
-        {log?.comments && (
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>{log.comments}</Paper>
-          </Grid>
-        )}
       </Grid>
     </div>
   );
 };
 
-export default Log;
+export default InputForm;

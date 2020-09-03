@@ -1,17 +1,42 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Headers = ({ headers }) => {
+  const classes = useStyles();
+
   return (
-    <div id="headers_details">
-      {headers &&
-        headers.map((header, i) => (
-          <div key={i} className="header_details">
-            <div className="header_name">{header.name}</div>
-            <div className="header_value">{header.value}</div>
-            <div className="header_comment">{header.comment}</div>
-          </div>
-        ))}
-    </div>
+    <Paper elevation={2} className={classes.paper} id="headers_details">
+      {headers.length > 0 ? (
+        <div className="query_string">
+          <Typography variant="h5" component="h2">
+            Headers
+          </Typography>
+          {headers.map((header, i) => (
+            <div key={i} className="header_details">
+              <Typography variant="body1" component="div">
+                <span>{header.name}:</span> <span>{header.value}</span>
+              </Typography>
+              <Typography variant="body1" component="div">
+                {header.comment}
+              </Typography>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <Typography variant="body1" component="h2">
+          No Headers
+        </Typography>
+      )}
+    </Paper>
   );
 };
 

@@ -1,17 +1,30 @@
-import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Timings = ({ timings }) => {
+  const classes = useStyles();
+
   return (
-    <div id="timings_details">
-      <div id="timings_blocked">{timings.blocked}</div>
-      <div id="timings_dns">{timings.dns}</div>
-      <div id="timings_connect">{timings.connect}</div>
-      <div id="timings_send">{timings.send}</div>
-      <div id="timings_wait">{timings.wait}</div>
-      <div id="timings_receive">{timings.receive}</div>
-      <div id="timings_ssl">{timings.ssl}</div>
-      <div id="timings_comment">{timings.comment}</div>
-    </div>
+    <Paper className={classes.paper} id="timings_details">
+      <Typography variant="subtitle1" component="h5">Timings</Typography>
+      <Typography variant="body1" component="div">blocked: <span>{timings.blocked}</span></Typography>
+      <Typography variant="body1" component="div">dns: <span>{timings.dns}</span></Typography>
+      <Typography variant="body1" component="div">connect: <span>{timings.connect}</span></Typography>
+      <Typography variant="body1" component="div">send: <span>{timings.send}</span></Typography>
+      <Typography variant="body1" component="div">wait: <span>{timings.wait}</span></Typography>
+      <Typography variant="body1" component="div">receive: <span>{timings.receive}</span></Typography>
+      <Typography variant="body1" component="div">ssl: <span>{timings.ssl}</span></Typography>
+      <Typography variant="body1" component="div">{timings.comment}</Typography>
+    </Paper>
   );
 };
 
