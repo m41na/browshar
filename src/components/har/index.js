@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   loading: {
     width: "100%",
+    textAlign: "center",
     "& > * + *": {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(3),
     },
   },
   footer: {
