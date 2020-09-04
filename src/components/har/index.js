@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import LanguageIcon from '@material-ui/icons/Language';
+import LanguageIcon from "@material-ui/icons/Language";
 import MenuIcon from "@material-ui/icons/Menu";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import Log from "./Log";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Log from "../har/Log";
+import HarInput from "../form/HarInput";
+import Filters from "../form/Filters";
+import { HarContext } from "../../context/HarContext";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Development © "}
       <Link color="inherit" href="https://material-ui.com/">
-        BrowsHAR
+        BrowseHAR
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -40,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
   },
+  loading: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
@@ -50,8 +60,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HarLayout = ({ har }) => {
+const HarLayout = () => {
   const classes = useStyles();
+  const {
+    state: har,
+    applyFilters,
+    resetFilters,
+    showInput,
+    toggleInput,
+    updateState,
+  } = useContext(HarContext);
 
   return (
     <div className={classes.root}>
@@ -67,19 +85,34 @@ const HarLayout = ({ har }) => {
             <MenuIcon />
           </LanguageIcon>
           <Typography variant="h6" className={classes.title}>
-            BrowsHAR
+            BrowseHAR
           </Typography>
-          <Button color="inherit">Dev Mode</Button>
+          {har?.log && (
+            <Filters
+              count={har.log.entries.length}
+              applyFilters={applyFilters}
+              resetFilters={resetFilters}
+            />
+          )}
+          <Button color="inherit" onClick={toggleInput}>
+            Dev Mode
+          </Button>
         </Toolbar>
       </AppBar>
       <Container component="main" className={classes.main}>
-        <Log log={har.log} />
+        {showInput ? (
+          <HarInput updateState={updateState} />
+        ) : har?.log ? (
+          <Log log={har.log} />
+        ) : (
+          <div className={classes.loading}>
+            <CircularProgress color="secondary" />
+          </div>
+        )}
       </Container>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1">
-            HAR content layout.
-          </Typography>
+          <Typography variant="body1">HAR content layout.</Typography>
           <Copyright />
         </Container>
       </footer>

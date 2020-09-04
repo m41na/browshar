@@ -1,12 +1,9 @@
-import React from 'react';
-import HarLayout from './components/har';
-import { har } from './components/store';
-import './App.scss';
+import React from "react";
+import HarLayout from "./components/har";
+import "./App.scss";
 
 function App() {
-  return (
-    <HarLayout har={har} />
-  );
+  return <HarLayout />;
 }
 
 export default App;

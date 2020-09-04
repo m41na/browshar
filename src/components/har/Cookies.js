@@ -2,12 +2,21 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     color: theme.palette.text.secondary,
   },
+  row_even: {
+    backgroundColor: grey[400],
+    padding: 10
+  },
+  row_odd: {
+    backgroundColor: grey[200],
+    padding: 10
+  }
 }));
 
 const Cookies = ({ cookies }) => {
@@ -21,8 +30,8 @@ const Cookies = ({ cookies }) => {
             Cookies
           </Typography>
           {cookies.map((cookie, i) => (
-            <div key={i} className="cookie_details">
-              <Typography variant="body1" component="div">
+            <Paper elevation={1} key={i} className={`cookie_details ${i % 2 === 0? classes.row_even : classes.row_odd}`}>
+              <Typography variant="body1" component="div" style={{ overflowWrap: "break-word" }}>
                 value: {cookie.name}: <span>{cookie.value}</span>
               </Typography>
               <Typography variant="body1" component="div">
@@ -43,7 +52,7 @@ const Cookies = ({ cookies }) => {
               <Typography variant="body1" component="div">
                 id: <span>{cookie.comment}</span>
               </Typography>
-            </div>
+            </Paper>
           ))}
         </div>
       ) : (
@@ -55,4 +64,4 @@ const Cookies = ({ cookies }) => {
   );
 };
 
-export default Cookies;
+export default React.memo(Cookies);

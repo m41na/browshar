@@ -28,4 +28,4 @@ const Timings = ({ timings }) => {
   );
 };
 
-export default Timings;
+export default React.memo(Timings);

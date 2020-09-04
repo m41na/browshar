@@ -57,4 +57,4 @@ const Content = ({ content }) => {
   );
 };
 
-export default Content;
+export default React.memo(Content);

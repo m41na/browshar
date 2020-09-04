@@ -87,4 +87,4 @@ const BeforeRequest = ({ before_request }) => {
   );
 };
 
-export default Cache;
+export default React.memo(Cache);

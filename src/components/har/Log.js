@@ -26,7 +26,7 @@ const Log = ({ log }) => {
       <Grid container spacing={3} id="log_details">
         <Grid item xs={12}>
           <Paper elevation={2} className={classes.paper}>
-            <Typography variant="subtitle" component="h2">
+            <Typography variant="subtitle1" component="h2">
               Version: <span>{log.version}</span>
             </Typography>
           </Paper>
@@ -68,4 +68,4 @@ const Log = ({ log }) => {
   );
 };
 
-export default Log;
+export default React.memo(Log);

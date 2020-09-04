@@ -22,4 +22,4 @@ const Creator = ({ creator }) => {
   );
 };
 
-export default Creator;
+export default React.memo(Creator);

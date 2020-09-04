@@ -22,4 +22,4 @@ const Browser = ({browser}) => {
     )
 }
 
-export default Browser;
+export default React.memo(Browser);

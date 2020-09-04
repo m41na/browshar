@@ -2,11 +2,20 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     color: theme.palette.text.secondary,
+  },
+  row_even: {
+    backgroundColor: grey[400],
+    padding: 10
+  },
+  row_odd: {
+    backgroundColor: grey[200],
+    padding: 10
   },
 }));
 
@@ -21,14 +30,14 @@ const Headers = ({ headers }) => {
             Headers
           </Typography>
           {headers.map((header, i) => (
-            <div key={i} className="header_details">
-              <Typography variant="body1" component="div">
-                <span>{header.name}:</span> <span>{header.value}</span>
+            <Paper elevation={1} key={i} className={`header_details ${i % 2 === 0? classes.row_even : classes.row_odd}`}>
+              <Typography variant="body1" component="div" style={{ overflowWrap: "break-word" }}>
+                <span>{header.name}</span>: <span>{header.value}</span>
               </Typography>
               <Typography variant="body1" component="div">
                 {header.comment}
               </Typography>
-            </div>
+            </Paper>
           ))}
         </div>
       ) : (
@@ -40,4 +49,4 @@ const Headers = ({ headers }) => {
   );
 };
 
-export default Headers;
+export default React.memo(Headers);

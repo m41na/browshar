@@ -15,13 +15,13 @@ const PostData = ({ postData }) => {
   const classes = useStyles();
 
   return (
-    <Paper elevation={2} className={classes.paper} id="postData_details">
+    <Paper elevation={1} className={classes.paper} id="postData_details">
       <Typography variant="body1" component="div">
         mimeType: <span>{postData.mimeType}</span>
       </Typography>
       <Params params={postData.params} />
-      <Typography variant="body1" component="div">
-        mimeType: <span>{postData.text}</span>
+      <Typography variant="body1" component="div" style={{ overflowWrap: "break-word" }}>
+        postData: <span>{postData.text}</span>
       </Typography>
       <Typography variant="body1" component="div">
         {postData.comment}
@@ -30,4 +30,4 @@ const PostData = ({ postData }) => {
   );
 };
 
-export default PostData;
+export default React.memo(PostData);
