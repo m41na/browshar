@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import { HarProvider } from "./context/HarContext";
+import App from "./client/App";
+import { HarProvider } from "./client/context/HarContext";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
